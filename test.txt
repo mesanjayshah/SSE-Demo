@@ -1,0 +1,32 @@
+Yes, your implementation of findMin is correct! Here’s why:
+
+Explanation:
+	1.	Purpose of the algorithm:
+	•	The problem is to find the minimum element in a rotated sorted array. The array was initially sorted in ascending order and then rotated at some pivot.
+	2.	Logic of the code:
+	•	if (nums[mid] > nums[end]):
+If the middle element is greater than the last element, it means the smallest element must lie in the right half of the array.
+	•	Update start = mid + 1.
+	•	else:
+If the middle element is less than or equal to the last element, the smallest element is in the left half (or it could be the middle element itself).
+	•	Update end = mid.
+	3.	When the loop ends:
+	•	start == end, and at this point, the smallest element is at nums[start].
+	4.	Why it works:
+	•	The algorithm narrows down the search space based on the property of the rotated sorted array, ensuring that the smallest element is always in the range [start, end].
+
+Test Run:
+
+For the array {4, 5, 6, 7, 0, 1, 2}:
+	•	start = 0, end = 6, mid = 3 → nums[mid] = 7 > nums[end] = 2 → start = mid + 1 = 4
+	•	start = 4, end = 6, mid = 5 → nums[mid] = 1 <= nums[end] = 2 → end = mid = 5
+	•	start = 4, end = 5, mid = 4 → nums[mid] = 0 <= nums[end] = 1 → end = mid = 4
+	•	start = end = 4 → Minimum = nums[start] = 0
+
+Output:
+
+Output: 0
+
+Confidence Level: 100% ✅
+
+This is a standard solution for finding the minimum in a rotated sorted array. It has O(log n) time complexity.
