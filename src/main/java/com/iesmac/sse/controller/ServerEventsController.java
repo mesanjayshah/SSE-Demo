@@ -19,10 +19,12 @@ import java.util.stream.Stream;
 @RequestMapping("/server-events")
 public class ServerEventsController {
 
+    private static final String URL = "/Users/sanjayshah/IdeaProjects/sse/test.txt";
+
     @GetMapping(produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public Flux<ServerSentEvent<Object>> getEvents() throws IOException {
 
-        Stream<String> lines = Files.lines(Path.of("/Users/sanjayshah/IdeaProjects/sse/test.txt"));
+        Stream<String> lines = Files.lines(Path.of(URL));
 
         AtomicInteger counter = new AtomicInteger();
         return Flux.fromStream(lines)
@@ -37,7 +39,7 @@ public class ServerEventsController {
     @GetMapping(path = "/alternative", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public Flux<String> getEventsAlternative() throws IOException {
 
-        Stream<String> lines = Files.lines(Path.of("/Users/sanjayshah/IdeaProjects/sse/test.txt"));
+        Stream<String> lines = Files.lines(Path.of(URL));
 
         return Flux.fromStream(lines)
                 .filter(line -> !line.isBlank())
